@@ -1,0 +1,85 @@
+# config.yaml
+
+# ── Jira Bağlantı Ayarları ──
+jira:
+  server: "https://jira.com.tr"
+  # Kimlik doğrulama: email + API token
+  auth:
+    username: "jirausername"
+    password: "jira123456"
+
+# ── Tarih Aralığı ──
+date_range:
+  start_date: "01.08.2026"
+  end_date: "31.08.2026"
+
+# ── Issue Filtreleme Kriterleri ──
+issue_filters:
+  # Issue türleri (birden fazla seçilebilir)
+  issue_types:
+    - "Sub-task"
+
+  # İzin verilen statüler
+  statuses:
+    - "In Progress"
+
+  # Projeler (boş bırakılırsa tüm projeler)
+  projects:
+    - "Project Name"
+    # - "ANOTHER"
+
+  # Due date zorunlu mu?
+  require_due_date: true
+
+  # Sadece atanmış issue'lar mı?
+  require_assignee: true
+
+# ── Worklog Kuralları ──
+worklog_rules:
+  # Günlük minimum çalışma saati
+  min_daily_hours: 8.0
+  # Günlük maksimum çalışma saati
+  max_daily_hours: 8.0
+  # Hafta sonları kontrol edilsin mi?
+  check_weekends: false
+
+# ── Rapor Ayarları ──
+report:
+  # Rapor formatı: console, excel, both
+  output_format: "excel"
+  excel_filename: "worklog_report.xlsx"
+  individual_sheets: true
+
+# ── Kontrol Edilecek Kullanıcılar ──
+#users:
+#  - username: "user1"
+#  - username: "user2"
+#  - username: "user3"
+
+users_file: "users_excel_file.xlsx"
+
+# ── E-Posta Bildirim Ayarları ──
+email:
+  enabled: false
+  smtp:
+    server: "smtp.gmail.com"
+    port: 587
+    use_tls: true
+    username: "your-email@gmail.com"
+    password: "your-app-password"
+
+  # Gönderen
+  from_address: "yourmail@example.com"
+  from_name: "Jira Worklog Sistem"
+
+  # Bildirim eşiği (bu değerin altındakilere mail gider)
+  threshold: 70
+
+  # Yöneticiye de özet mail gitsin mi?
+  send_manager_summary: false
+  manager_emails:
+    - "yourmanager@example.com"
+
+  # Konu şablonu ({name} ve {percentage} kullanılabilir)
+  subject_template: "⚠️ Worklog Hatırlatma — {name} (%{percentage})"
+  manager_subject: "📊 Worklog Aylık Özet Raporu"
